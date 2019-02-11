@@ -32,6 +32,7 @@ public class Balbasu : MonoBehaviour, IExplodable
         SwitchStatus(Status.Dead);
         body.AddExplosionForce(force, position, radius, upwardModifier);
         randomAudio.PlayRandomAudio();
+        Destroy(gameObject, UnityEngine.Random.Range(3f, 5f));
     }
 
     private void Awake()
@@ -77,7 +78,7 @@ public class Balbasu : MonoBehaviour, IExplodable
     {
         if (newStatus == status) return;
         status = newStatus;
-        Debug.Log("New Status: " + status);
+        //Debug.Log("New Status: " + status);
         switch (status)
         {
             case Status.Falling:

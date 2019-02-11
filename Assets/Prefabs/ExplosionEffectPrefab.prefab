@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33059257021396336}
   - component: {fileID: 23162997275059482}
   - component: {fileID: 114898275360846608}
+  - component: {fileID: 114355931933476134}
   m_Layer: 0
   m_Name: ExplosionEffectPrefab
   m_TagString: Untagged
@@ -84,6 +85,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060789763450566}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114355931933476134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1060789763450566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee0154245276514a8243225e5478e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.25
+  useRotation: 0
 --- !u!114 &114898275360846608
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,8 +21,6 @@ public class TimedSpawnPrefab : MonoBehaviour
             nextSpawnTime = Time.time + timeInterval;
             Vector3 offset = UnityEngine.Random.onUnitSphere * randomRange;
             GameObject crate = Instantiate(prefab, transform.position + offset, Quaternion.identity);
-            Destroy(crate, 60f);
-
         }
     }
 }

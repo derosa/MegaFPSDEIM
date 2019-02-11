@@ -13,10 +13,21 @@ public class PlayerAttack : MonoBehaviour
 
     Rigidbody mybody;
     float nextShotTime = 0f;
+    GameObject nextProjectile;
+
 
     private void Awake()
     {
         mybody = GetComponent<Rigidbody>();
+        CreateNewProjectile();
+    }
+
+    private void CreateNewProjectile()
+    {
+        nextProjectile = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        nextProjectile.transform.SetParent(bulletSpawnPoint);
+        nextProjectile.transform.localPosition = Vector2.zero;
+        nextProjectile.transform.forward = Camera.main.transform.forward * 100f;
     }
 
     void Update()
@@ -31,21 +42,32 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Time.time > nextShotTime)
         {
+            if (nextProjectile == null)
+            {
+                CreateNewProjectile();
+            }
+
             Ray ray = Camera.main.ViewportPointToRay(Vector2.one * 0.5f);
-            GameObject newBullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 1000f, bulletMask))
             {
-                newBullet.transform.LookAt(hit.point);
+                nextProjectile.transform.LookAt(hit.point);
             }
             else
             {
-                newBullet.transform.LookAt(Camera.main.transform.forward * 1000f);
+                nextProjectile.transform.LookAt(Camera.main.transform.forward * 1000f);
             }
+            nextProjectile.transform.SetParent(null, true);
+
+            var bulletComponent = (IBullet)nextProjectile.GetComponent(typeof(IBullet));
+            bulletComponent.Fire();
 
             nextShotTime = Time.time + shotDelay;
-            Destroy(newBullet, bulletTTL);
+            Destroy(nextProjectile, bulletTTL);
+
+            CreateNewProjectile();
         }
     }
 

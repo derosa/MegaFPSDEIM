@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigBullet : MonoBehaviour
+public interface IBullet
+{
+    void Fire();
+}
+
+public class BigBullet : MonoBehaviour, IBullet
 {
 
     public AnimationCurve speedCurve;
@@ -13,13 +18,24 @@ public class BigBullet : MonoBehaviour
     public float upwardModifier = 10;
     public GameObject explosionPrefab;
     public Transform particlesTransform;
+    TrailRenderer trailRenderer;
+    ParticleSystem particles;
 
     float currentTime = 0f;
     Rigidbody myRB;
 
     private void Awake()
     {
-        myRB = GetComponent<Rigidbody>();
+        //myRB = GetComponent<Rigidbody>();
+
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
+        trailRenderer.enabled = false;
+        trailRenderer.Clear();
+
+        particles = GetComponentInChildren<ParticleSystem>();
+        particles.Stop();
+
+        enabled = false;
     }
 
     void Update()
@@ -42,7 +58,7 @@ public class BigBullet : MonoBehaviour
 
         for (int t = 0; t < overlappedObjects.Length; t++)
         {
-            Debug.Log("Explotando " + overlappedObjects[t].name);
+            //Debug.Log("Explotando " + overlappedObjects[t].name);
             IExplodable explodable = (IExplodable)overlappedObjects[t].GetComponent(typeof(IExplodable));
             if (explodable != null)
             {
@@ -63,5 +79,14 @@ public class BigBullet : MonoBehaviour
         expl.GetComponent<Explosion>().initialScale = explosionRadius;
 
         Destroy(gameObject);
+    }
+
+    public void Fire()
+    {
+        myRB = gameObject.AddComponent<Rigidbody>();
+        myRB.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        trailRenderer.enabled = true;
+        enabled = true;
+        particles.Play();
     }
 }
