@@ -2,15 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour {
+public abstract class Weapon : MonoBehaviour
+{
+    public GameObject weaponPrefab;
+    protected GameObject weapon;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public virtual void Release()
+    {
+        if (weapon != null)
+        {
+            weapon.SetActive(false);
+        }
+    }
+    public virtual GameObject Equip()
+    {
+
+        if (weapon == null)
+        {
+            weapon = Instantiate(weaponPrefab);
+        }
+        weapon.SetActive(true);
+        return weapon;
+    }
+
+    public virtual void Activate() { 
+        Debug.Log("Bang!");
+    }
 }
