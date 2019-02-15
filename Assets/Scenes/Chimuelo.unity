@@ -271,6 +271,16 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 54801921097662440, guid: 9884bb0d561b9f74dba05bbcf4c3613d,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54801921097662440, guid: 9884bb0d561b9f74dba05bbcf4c3613d,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 135262978303254098, guid: 9884bb0d561b9f74dba05bbcf4c3613d, type: 2}
     - {fileID: 65068890023828746, guid: 9884bb0d561b9f74dba05bbcf4c3613d, type: 2}
