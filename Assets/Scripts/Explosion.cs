@@ -11,8 +11,12 @@ public class Explosion : MonoBehaviour
     private void Awake()
     {
         transform.localScale = Vector3.one * initialScale;
-        CameraShaker.Instance.Shake(initialScale * 0.25f, timeToExtint * 2f);
+        if (CameraShaker.Instance != null)
+        {
+            CameraShaker.Instance.Shake(initialScale * 0.25f, timeToExtint * 2f);
+        }
     }
+
     void Update()
     {
         initialScale -= Time.deltaTime * 1f / timeToExtint;

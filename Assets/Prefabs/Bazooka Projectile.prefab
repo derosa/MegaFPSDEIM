@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4874473982348118}
-  - component: {fileID: 114511378317589764}
+  - component: {fileID: 114806958916179102}
   m_Layer: 9
-  m_Name: BigGun
+  m_Name: Bazooka Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 0.01
---- !u!114 &114511378317589764
+--- !u!114 &114806958916179102
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1548689609558412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ffc6f97724c9a469b351334e5db72b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f941961141b17146b950532f7fa0357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speedCurve:
@@ -397,11 +397,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeToMaxSpeed: 1
-  maxSpeed: 250
-  boomForce: 1000
+  timeToMaxSpeed: 0.5
+  maxSpeed: 20
+  boomForce: 500
   explosionRadius: 10
-  upwardModifier: 2
+  upwardModifier: 10
   explosionPrefab: {fileID: 1060789763450566, guid: 6a99775fbc1477d4294306f5a547887e,
     type: 2}
   particlesTransform: {fileID: 4360536456398414}
