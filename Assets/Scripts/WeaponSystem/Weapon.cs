@@ -10,7 +10,7 @@ public abstract class Weapon : MonoBehaviour
     [Header("Projectile settings")]
     public float cooldownTime = 0.2f;
 
-    protected GameObject projectile;
+    protected GameObject fakeProjectile;
 
     protected float nextShootTime = 0f;
 
@@ -25,17 +25,36 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public virtual void Equip(Transform attachPoint = null)
+    public virtual void Equip(Transform attachPoint)
     {
         Debug.Log("Equipping " + name);
         gameObject.SetActive(true);
         transform.SetParent(attachPoint);
         transform.localPosition = Vector3.zero;
         transform.rotation = Quaternion.identity;
+
         if (attachPoint != null)
         {
             transform.rotation = attachPoint.rotation;
         }
+
+        if (fakeProjectile == null)
+        {
+            fakeProjectile = CreateProjectile();
+        }
+
+        fakeProjectile.SetActive(true);
+    }
+
+    GameObject CreateProjectile()
+    {
+        fakeProjectile = Instantiate(projectilePrefab);
+        fakeProjectile.transform.SetParent(projectileSpawnPoint ?? transform);
+        fakeProjectile.transform.localPosition = Vector2.zero;
+        fakeProjectile.transform.localScale = Vector3.one;
+        LookForward(fakeProjectile.transform);
+
+        return fakeProjectile;
     }
 
     public virtual void Activate()
@@ -44,15 +63,10 @@ public abstract class Weapon : MonoBehaviour
         {
             Debug.Log("Bang!");
             nextShootTime = Time.time + cooldownTime;
-            if (projectile == null)
-            {
-                projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity, projectileSpawnPoint != null ? projectileSpawnPoint : transform);
-            }
+            fakeProjectile.SetActive(false);
 
-            LookForward(projectile.transform);
-
-            projectile.GetComponent<Projectile>().Activate();
-            projectile = null;
+            GameObject newProjectile = CreateProjectile();
+            newProjectile.GetComponent<Projectile>().Activate();
         }
     }
 

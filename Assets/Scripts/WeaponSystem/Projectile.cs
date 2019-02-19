@@ -7,6 +7,5 @@ public abstract class Projectile : MonoBehaviour
     public virtual void Activate()
     {
         Debug.Log("Activated " + name);
-        Destroy(gameObject);
     }
 }

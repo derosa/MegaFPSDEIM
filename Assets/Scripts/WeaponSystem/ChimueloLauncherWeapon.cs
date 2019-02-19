@@ -5,5 +5,4 @@ using UnityEngine.Audio;
 
 public class ChimueloLauncherWeapon : Weapon
 {
-
 }

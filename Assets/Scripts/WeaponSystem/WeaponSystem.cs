@@ -36,7 +36,6 @@ public class WeaponSystem : MonoBehaviour
         }
 
         currentWeaponIndex += offset;
-
         if (currentWeaponIndex >= weapons.Count)
         {
             currentWeaponIndex = 0;
